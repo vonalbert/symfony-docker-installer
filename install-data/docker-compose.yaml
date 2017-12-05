@@ -33,9 +33,9 @@ services:
       - app_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: app
-      MYSQL_USER: web
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
 
   adminer:
     image: adminer
