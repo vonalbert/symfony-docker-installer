@@ -7,14 +7,18 @@ if [ "${CONTAINERS}" != "" ]; then
     docker rm ${CONTAINERS}
 fi
 
-# Prepare the build directory and move inside it
-cp -r install-data/* .
+# Copy the installation data into the build directory
+if [ "$1" != "" ]; then
+    mkdir -p "./$1"
+    cp -r install-data/* "./$1"
+    cd "./$1"
+else
+    cp -r install-data/* .
+fi
 
-# Start the containers and create the project
-docker-compose up -d
+# Create the project
+# docker-compose up -d
 docker-compose run --rm app composer create-project "symfony/skeleton" tmp --prefer-dist --no-progress --no-interaction
-
-# Clear the temporary project files
 cp -rf tmp/. . && rm -Rf tmp
 
 # Install some common dependencies

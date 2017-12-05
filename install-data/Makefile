@@ -8,6 +8,8 @@ build:
 	@-$(RUN) npm run dev
 	@-$(RUN) chmod 777 -Rf node_modules vendor .env
 	@-$(RUN) bin/console doctrine:schema:update --force
+	@-$(RUN) rm -rf var
+	@-$(RUN) bin/console cache:warmup
 .PHONY: build
 
 
