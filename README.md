@@ -1,2 +1,1 @@
-# symfony-docker-installer
-# symfony-docker-installer
+# Symfony Docker Installer
