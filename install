@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# The directory where to build the project
+BUILDIR='./build/'
+
+# Stop and remove all running containers
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+
+# Prepare the build directory and move inside it
+mkdir -p ${BUILDIR}
+rm -rf ${BUILDIR}/*
+cp -r install-data/* ${BUILDIR}
+cd ${BUILDIR}
+
+# Start the containers and create the project
+docker-compose up -d
+docker-compose run --rm app composer create-project "symfony/skeleton" tmp --prefer-dist --no-progress --no-interaction
+
+# Clear the temporary project files
+mv -f tmp/* . && rm -Rf tmp
+
+# Install some common dependencies
+docker-compose run --rm app composer req orm asset security translation form encore validator twig asset annot
+docker-compose run --rm app composer req --dev debug-pack
+docker-compose run --rm app npm install --save jquery sass-loader node-sass
+
+# Run make build on the project
+make build

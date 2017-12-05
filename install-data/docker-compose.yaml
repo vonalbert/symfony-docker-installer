@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: docker/app
+    depends_on:
+      - db
+    volumes:
+      - .:/srv/app:rw
+
+  nginx:
+    build:
+      context: docker/nginx
+    depends_on:
+      - app
+    volumes:
+      - ./public:/srv/app/public:ro
+    ports:
+      - '80:80'
+
+  h2-proxy:
+    build:
+      context: docker/httpd
+    ports:
+      - '443:443'
+
+  # Database images
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - app_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app
+      MYSQL_USER: web
+      MYSQL_PASSWORD: password
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  app_data: ~
