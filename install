@@ -8,10 +8,12 @@ if [ "${CONTAINERS}" != "" ]; then
 fi
 
 # Copy the installation data into the build directory
-if [ "$1" != "" ]; then
-    mkdir -p "./$1"
-    cp -r install-data/* "./$1"
-    cd "./$1"
+# If the .git directory exists, this means we're developing the installer,
+# otherwise we're using the installer to boot a new project.
+if [ -d "./.git" ]; then
+    mkdir -p "./test"
+    cp -r install-data/* "./test"
+    cd "./test"
 else
     cp -r install-data/* .
 fi
@@ -31,4 +33,4 @@ docker-compose run --rm app npm install --save jquery sass-loader node-sass
 make build
 
 # Remove the installer data
-rm -rf .git install-data install README.md
+rm -rf install-data install README.md

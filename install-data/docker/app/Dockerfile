@@ -1,4 +1,4 @@
-FROM composer:1.5
+FROM composer:1.5 AS composer
 FROM php:7.1-fpm-alpine
 
 WORKDIR /srv/app
@@ -42,7 +42,7 @@ COPY php.ini /usr/local/etc/php/php.ini
 # Composer Setup
 # --------------------------------------
 ENV COMPOSER_ALLOW_SUPERUSER 1
-COPY --from=0 /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 
 # --------------------------------------
