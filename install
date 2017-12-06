@@ -17,6 +17,7 @@ else
 fi
 
 # Create the project
+docker-compose build
 docker-compose run --rm app composer create-project "symfony/skeleton" tmp --prefer-dist --no-progress --no-interaction
 cp -rf tmp/. . && rm -Rf tmp
 
