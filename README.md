@@ -30,3 +30,7 @@ When you have built your project you can use `make` to control the environment. 
 For a daily usage when you start to work to the project just fire `make start`, perform tasks inside the application container with `make shell` and finally, when you're done working with the project, fire `make stop` to stop docker.
 
 By default, when you start the environment, the application is available at `localhost` port 80.
+
+
+## Credits
+This project is highly based on the [dunglas' work](https://github.com/dunglas/symfony-docker).
