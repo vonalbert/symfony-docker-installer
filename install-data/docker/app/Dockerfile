@@ -1,3 +1,4 @@
+FROM composer:1.5
 FROM php:7.1-fpm-alpine
 
 WORKDIR /srv/app
@@ -41,9 +42,7 @@ COPY php.ini /usr/local/etc/php/php.ini
 # Composer Setup
 # --------------------------------------
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN curl --silent --show-error https://getcomposer.org/installer | php \
-	&& mv composer.phar /usr/local/bin/composer \
-	&& composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative  --no-interaction
+COPY --from=0 /usr/bin/composer /usr/bin/composer
 
 
 # --------------------------------------
