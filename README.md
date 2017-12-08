@@ -6,11 +6,15 @@ The only requirement to build the project are docker-ce and a bash shell.
 The installer was developed and tested on ubuntu 17.10.
 
 ## Installation
-To run the project just download the zip file from github or clone the repository. At that point cd into the project dir and run `sudo bash install`.
+To run the project just download the zip file from github. If you want you can even `git-clone` this repository, but you have to remove the *.git* folder inside it. This is needeb because the `install` script verifies if the git's folder is there to guess where to create the application:
+- if git is found it will create the project in a git-ignored directory. This setup is used for testing the installer.
+- if git is not there, then the script will create the application in the current directory, then removes itself when done.
+
+When you placed the script in the right directory, cd into it and run `sudo bash install`.
 
 When the process is complete the installer is removed and you should have your project built and running.
 
-Note that in ubuntu like in any other linux distribution you could have permissions issues due to the fact the project is created inside the docker container and the docker daemon is running as root. Because of this, the generated files will have owner set to root:root. As a workaround, run the following command instead
+Note that in ubuntu (or in any other linux distribution) you could encounter permissions issues due to the fact the project is created inside a running container. Because of this, the generated files will have owner set to root:root. As a workaround, run the following command instead
 
 ```sudo bash install && sudo chown -R ${USER:=$(/usr/bin/id -run)}:$USER .```
 
