@@ -1,7 +1,7 @@
 #!/bin/sh
 
 composer install --no-progress --no-suggest --no-interaction
-chmod 777 .env  # allow to edit the .env file
+chmod -R 777 .env var/
 
 npm install
 npm run dev
