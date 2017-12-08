@@ -56,4 +56,4 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
 
 
 COPY appinit /usr/local/bin/appinit
-RUN chmod +x /usr/local/bin/appinit && appinit 
+RUN chmod +x /usr/local/bin/appinit

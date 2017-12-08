@@ -3,7 +3,7 @@ RUN=docker-compose run --rm app
 
 build: stop
 	docker-compose build --force-rm
-	docker-compose up -d
+	docker-compose run --rm app appinit
 .PHONY: build
 
 
