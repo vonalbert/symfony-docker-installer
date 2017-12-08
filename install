@@ -19,14 +19,12 @@ else
 fi
 
 # Create the project
-docker-compose build
 docker-compose run --rm app composer create-project "symfony/skeleton" tmp --prefer-dist --no-progress --no-interaction
 cp -rf tmp/. . && rm -Rf tmp
 
 # Install some common dependencies
 docker-compose run --rm app composer req orm asset security translation form encore validator twig asset annot
 docker-compose run --rm app composer req --dev debug-pack
-docker-compose run --rm app npm install
 docker-compose run --rm app npm install --save jquery sass-loader node-sass
 
 # Run make build on the project

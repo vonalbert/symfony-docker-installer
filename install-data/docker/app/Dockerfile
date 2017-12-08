@@ -6,8 +6,12 @@ WORKDIR /srv/app
 
 
 # --------------------------------------
-# Install Dependencies
+# System setup
 # --------------------------------------
+ENV ENV /root/.ashrc
+RUN echo "alias sf='bin/console'" >> /root/.ashrc \
+    && echo "alias ll='ls -lah'"  >> /root/.ashrc
+
 RUN apk add --no-cache --virtual .persistent-deps \
 		git \
 		icu-libs \
@@ -32,7 +36,7 @@ RUN set -xe \
 
 
 # --------------------------------------
-# PHP/Composer Setup
+# PHP/Composer setup
 # --------------------------------------
 ENV COMPOSER_ALLOW_SUPERUSER 1
 COPY php.ini /usr/local/etc/php/php.ini
@@ -51,9 +55,5 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
 	&& ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg
 
 
-# --------------------------------------
-# Setup ash environment / aliases
-# --------------------------------------
-ENV ENV /root/.ashrc
-RUN echo "alias sf='bin/console'" >> /root/.ashrc \
-    && echo "alias ll='ls -lah'"  >> /root/.ashrc
+COPY appinit /usr/local/bin/appinit
+RUN chmod +x /usr/local/bin/appinit && appinit 

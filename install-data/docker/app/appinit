@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -f 'composer.json' ]; then
+    exit 0      # The project has not been installed yet.
+fi
+
+
+composer install --no-progress --no-suggest --no-interaction
+chmod 777 .env  # allow to edit the .env file
+
+npm install
+npm run dev
