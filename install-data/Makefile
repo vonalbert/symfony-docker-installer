@@ -28,3 +28,10 @@ shell:
 	@-docker-compose exec app sh
 	@echo "\n"
 .PHONY: shell
+
+
+# Assign the entire project to the current user:group
+permissions:
+	@-docker-compose run --rm app chown -R $(shell id -u):$(shell id -g) .
+	@echo "Project owner has been changed to $(shell id -nu):$(shell id -ng)"
+.PHONY: permissions

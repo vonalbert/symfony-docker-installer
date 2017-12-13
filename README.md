@@ -10,13 +10,9 @@ To run the project just download the zip file from github. If you want you can e
 - if git is found it will create the project in a git-ignored directory. This setup is used for testing the installer.
 - if git is not there, then the script will create the application in the current directory, then removes itself when done.
 
-When you placed the script in the right directory, cd into it and run `sudo bash install`.
+When you placed the script in the right directory, cd into it and run `bash install`.
 
 When the process is complete the installer is removed and you should have your project built and running.
-
-Note that in ubuntu (or in any other linux distribution) you could encounter permissions issues due to the fact the project is created inside a running container. Because of this, the generated files will have owner set to root:root. As a workaround, run the following command instead
-
-```sudo bash install && sudo chown -R ${USER:=$(/usr/bin/id -run)}:$USER .```
 
 
 ## Daily usage
