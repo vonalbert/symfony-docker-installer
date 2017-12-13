@@ -24,7 +24,7 @@ docker-compose run --rm app composer create-project "symfony/skeleton" tmp --pre
 cp -rf tmp/. . && rm -Rf tmp
 
 # Install some common dependencies
-docker-compose run --rm app composer req orm asset security translation form encore validator twig asset annot
+docker-compose run --rm app composer req orm annot security translation form validator twig asset encore
 docker-compose run --rm app composer req --dev debug-pack
 docker-compose run --rm app npm install --save jquery sass-loader node-sass
 
