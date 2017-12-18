@@ -31,10 +31,14 @@ docker-compose run --rm app composer req orm annot security translation form val
 docker-compose run --rm app composer req --dev debug-pack
 docker-compose run --rm app npm install --save jquery sass-loader node-sass
 
+# Patch configuration in order that matches the docker config
+patch .env.dist patches/.env.patch
+patch .env patches/.env.patch
+
 # Build the project, then ensure again the permissions are correctly set,
 # in order to be allowed to edit the files from the host.
 # When done, start the container
 make build permissions start
 
 # Remove the installer data
-rm -rf install-data install
+rm -rf install-data install patches

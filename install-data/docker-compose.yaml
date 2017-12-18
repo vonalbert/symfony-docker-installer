@@ -30,18 +30,13 @@ services:
     image: mysql:5.7
     restart: always
     volumes:
-      - app_data:/var/lib/mysql
+      - /var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_password
+      MYSQL_DATABASE: database
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
-
-volumes:
-  app_data: ~
