@@ -22,7 +22,7 @@ fi
 # Create the project then assign all the generated files to the current user
 # This is needed in order to allow to run this script as a normal user.
 # The `make permissions` target will run chown inside the app container.  
-docker-compose run --rm app composer create-project "symfony/skeleton" tmp --prefer-dist --no-progress --no-interaction
+docker-compose run --rm app composer create-project "symfony/website-skeleton" tmp --prefer-dist --no-progress --no-interaction
 make permissions
 cp -rf tmp/. . && rm -Rf tmp
 
