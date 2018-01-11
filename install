@@ -26,11 +26,6 @@ docker-compose run --rm app composer create-project "symfony/skeleton" tmp --pre
 make permissions
 cp -rf tmp/. . && rm -Rf tmp
 
-# Install some common dependencies
-docker-compose run --rm app composer req orm annot security translation form validator twig asset encore
-docker-compose run --rm app composer req --dev debug-pack
-docker-compose run --rm app npm install --save jquery sass-loader node-sass
-
 # Patch configuration in order that matches the docker config
 patch .env.dist patches/.env.patch
 patch .env patches/.env.patch

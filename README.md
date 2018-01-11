@@ -32,5 +32,19 @@ For a daily usage when you start to work to the project just fire `make start`, 
 By default, when you start the environment, the application is available at `localhost` port 80.
 
 
+## Enable assets compilation
+
+1. Run `npm install --save jquery sass-loader node-sass` in the docker-machine shell
+2. Add the following entries in webpack.config.js
+```
+.addEntry('scripts', './assets/js/app.js')
+.addStyleEntry('style', './assets/css/app.scss')
+.createSharedEntry ('vendor', [
+    'jquery',
+])
+```
+3. Uncomment the npm-related lines in `docker/app/appinit` to enable automatic assets compilation when docker-machine is built
+
+
 ## Credits
 This project is highly based on the [dunglas' work](https://github.com/dunglas/symfony-docker).
